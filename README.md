@@ -42,38 +42,55 @@ A full-stack skiing league platform built with **React**, **Node.js**, **Express
 ```
 web2FinalProject/
 ├── Web2Final/
-│   └── nodejs-express-mysql/
-│       ├── app.js
-│       ├── package.json
-│       ├── config/
-│       │   └── db.js
-│       ├── controllers/
-│       │   ├── brackets.controller.js
-│       │   ├── events.controller.js
-│       │   ├── news.controller.js
-│       │   └── person.controller.js
-│       ├── models/
-│       │   ├── bracket.model.js
-│       │   ├── event.model.js
-│       │   ├── news.model.js
-│       │   ├── person.model.js
-│       │   └── team.model.js
-│       ├── routes/
-│       │   ├── brackets.routes.js
-│       │   ├── coaches.routes.js
-│       │   ├── events.routes.js
-│       │   ├── news.routes.js
-│       │   └── players.routes.js
-│       ├── uploads/
-│       │   └── [uploaded files]
-│       ├── views/
-│       │   └── [view templates]
-│       └── public/
-│           ├── css/
-│           ├── js/
-│           └── images/
-├── SQLUsed.pdf
-└── README.md
+│   ├── nodejs-express-mysql/        # 🔧 Backend (Express + MySQL)
+│   │   ├── app.js                   # Main server file
+│   │   ├── package.json             # Node dependencies and scripts
+│   │   ├── config/
+│   │   │   └── db.js                # DB connection logic
+│   │   ├── controllers/
+│   │   │   ├── brackets.controller.js
+│   │   │   ├── events.controller.js
+│   │   │   ├── news.controller.js
+│   │   │   └── person.controller.js
+│   │   ├── models/
+│   │   │   ├── bracket.model.js
+│   │   │   ├── event.model.js
+│   │   │   ├── news.model.js
+│   │   │   ├── person.model.js
+│   │   │   └── team.model.js
+│   │   ├── routes/
+│   │   │   ├── brackets.routes.js
+│   │   │   ├── coaches.routes.js
+│   │   │   ├── events.routes.js
+│   │   │   ├── news.routes.js
+│   │   │   └── players.routes.js
+│   │   ├── uploads/                 # 📸 Uploaded media files (e.g. player logos)
+│   │   └── README.md                # Backend notes or setup (optional)
+│
+│   ├── react-frontend/              # 🌐 Frontend (React)
+│   │   ├── public/
+│   │   │   └── index.html           # HTML entry point
+│   │   ├── src/
+│   │   │   ├── App.css
+│   │   │   ├── App.jsx              # Main React app
+│   │   │   ├── index.js
+│   │   │   ├── components/
+│   │   │   │   ├── CoachForm.jsx
+│   │   │   │   ├── NewsForm.jsx
+│   │   │   │   ├── PlayerForm.jsx
+│   │   │   │   ├── TeamForm.jsx
+│   │   │   │   └── EventForm.jsx
+│   │   │   └── pages/
+│   │   │       ├── Home.jsx
+│   │   │       ├── News.jsx
+│   │   │       ├── Teams.jsx
+│   │   │       └── Events.jsx
+│   │   ├── assets/                  # 🖼 Images, icons, etc.
+│   │   └── package.json
+│
+│   └── SQLUsed.pdf                  # 🗃️ Schema dump / reference
+│
+└── README.md                        # 🌟 Main project documentation
 ```
 
 ---
