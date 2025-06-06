@@ -75,9 +75,9 @@ A full-stack skiing league platform built with **React**, **Node.js**, **Express
 
 - **multer** – File upload handler configured for image submissions (e.g., team logos or user profile pictures), stored locally in an `uploads/` directory.
 
-- 📸 Uploaded files are saved in `/uploads/` relative to the Express app root. Ensure this folder exists and is writable.
+- 📸 Uploaded files are saved in `/uploads/` relative to the Express app root.
 
-- **CORS Configured** – Middleware enables secure frontend-backend communication (e.g., React on `localhost:3000` calling Express on `localhost:5000`).
+- **CORS Configured** – Middleware enables secure frontend-backend communication.
 
 - **Security & Best Practices**:
   - Uses prepared statements (`?`) for SQL queries to avoid injection.
