@@ -22,18 +22,24 @@ A full-stack skiing league platform built with **React**, **Node.js**, **Express
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- React 18 (Create React App)
-- React Router v6
-- Bootstrap 5 / SCSS
-- Font Awesome & React Icons
+## 🧩 Frontend
 
-### Backend
-- Node.js & Express
-- MySQL
-- RESTful API
-- express-validator for input validation
-- multer for file uploads
+- **React 18** – Built using [Create React App](https://create-react-app.dev/), utilizing functional components and React hooks.
+- **React Router v6** – Enables multi-page navigation for routes such as Home, Teams, News, Events, and Registration Forms.
+- **Bootstrap 5 + SCSS** – Used for responsive layout and clean visual styling.
+- **Font Awesome & React Icons** – Provides consistent iconography across the interface.
+- **Dynamic Forms** – Players, coaches, teams, events, and news can be created and updated through connected form components.
+
+---
+
+## 🛠 Backend
+
+- **Node.js + Express** – Backend REST API structured with modular `controllers`, `models`, and `routes`.
+- **MySQL** – Relational database for managing leagues, license levels, teams, people, news, and events.
+- **RESTful API** – Endpoints for `/api/players`, `/api/coaches`, `/api/teams`, `/api/news`, `/api/events`, and `/api/brackets`.
+- **express-validator** – Provides input validation for registration and form submissions.
+- **multer** – Handles image uploads (e.g. profile pictures) via file-based storage.
+- **CORS Configured** – Allows frontend to communicate with the backend on `localhost:3000`.
 
 ---
 
