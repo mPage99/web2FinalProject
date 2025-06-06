@@ -1,6 +1,6 @@
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "lego2832",
-  DB: "testdb",
+  HOST: "<host>",
+  USER: "<user>",
+  PASSWORD: "<pass>",
+  DB: "<db_name>",
 };
