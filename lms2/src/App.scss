@@ -1,0 +1,11 @@
+//import bootstrap css
+@import "./custom.scss";
+
+//now place your custom css below...
+
+body {
+  background-image: url("./images/background.jpg");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-attachment: fixed;
+}

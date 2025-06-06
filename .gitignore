@@ -1,0 +1,65 @@
+# Dependencies
+**/node_modules/
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+**/coverage/
+
+# Production build
+/build
+**/build/
+/dist
+**/dist/
+
+# Environment and sensitive files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/db.config.js
+Web2Final/nodejs-express-mysql/app/config/db.config.js
+
+# Database files
+*.sql
+dump_file.sql
+
+# IDE - WebStorm
+.idea/
+**/.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+**/.vscode/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Temporary files
+**/tmp/
+**/temp/
+.cache/
+**/.cache/
+
+# Debug
+debug.log
+**/debug/
