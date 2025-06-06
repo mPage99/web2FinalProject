@@ -24,22 +24,65 @@ A full-stack skiing league platform built with **React**, **Node.js**, **Express
 
 ## 🧩 Frontend
 
-- **React 18** – Built using [Create React App](https://create-react-app.dev/), utilizing functional components and React hooks.
-- **React Router v6** – Enables multi-page navigation for routes such as Home, Teams, News, Events, and Registration Forms.
-- **Bootstrap 5 + SCSS** – Used for responsive layout and clean visual styling.
-- **Font Awesome & React Icons** – Provides consistent iconography across the interface.
-- **Dynamic Forms** – Players, coaches, teams, events, and news can be created and updated through connected form components.
+- **React 18** – Built using [Create React App](https://create-react-app.dev/), utilizing functional components, hooks (`useState`, `useEffect`, etc.), and reusable modules.
+- **React Router v6** – Enables SPA-style navigation between key routes:
+  - `/` (Home)
+  - `/teams`
+  - `/players`
+  - `/coaches`
+  - `/news`
+  - `/events`
+  - `/register`
+- **Component Structure**:
+  - `Layout` – Shared wrapper component that injects the `Header` and `Footer` on every page.
+  - `Header` – Contains the main navigation bar (Bootstrap-based).
+  - `Footer` – Sticky footer with site information.
+  - `Home` – Landing page using a **Bootstrap Carousel** to showcase images or highlights.
+  - `TeamsList`, `PlayersList`, `CoachesList` – Fetch and display lists of people or teams.
+  - `TeamDetails`, `CoachDetails`, `PlayerDetails` – Conditional rendering for single-entity views (optional).
+  - `TeamForm`, `PlayerForm`, `CoachForm`, `EventForm`, `NewsForm` – Forms to create and update entries.
+  - `NewsFeed` – Scrollable display of recent news entries.
+  - `EventsCalendar` or `EventsList` – Shows events by date and location.
+- **Bootstrap 5 + SCSS** – Responsive grid layout, clean component styling, theming using custom SCSS.
+- **Font Awesome & React Icons** – Icons used across buttons, forms, nav links, and more.
+- **Form Validation & UX**:
+  - Controlled components for user input.
+  - Validation feedback and error display from the backend (`express-validator`).
+  - File upload fields (player/coach images) integrated via `multer`.
 
 ---
 
 ## 🛠 Backend
 
-- **Node.js + Express** – Backend REST API structured with modular `controllers`, `models`, and `routes`.
-- **MySQL** – Relational database for managing leagues, license levels, teams, people, news, and events.
-- **RESTful API** – Endpoints for `/api/players`, `/api/coaches`, `/api/teams`, `/api/news`, `/api/events`, and `/api/brackets`.
-- **express-validator** – Provides input validation for registration and form submissions.
-- **multer** – Handles image uploads (e.g. profile pictures) via file-based storage.
-- **CORS Configured** – Allows frontend to communicate with the backend on `localhost:3000`.
+- **Node.js + Express** – Backend REST API organized with a modular folder structure:
+  - `models/` – Define data access logic for each entity (Teams, People, Events, News, Brackets).
+  - `controllers/` – Business logic and CRUD operations for each route.
+  - `routes/` – Route definitions mapped to controller methods using Express Router.
+
+- **MySQL** – Relational database schema with the following core tables:
+  - `leagues`, `license_levels`, `people`, `teams`, `news`, `events`
+  - Foreign key constraints maintain referential integrity (e.g. `teams.coach_id → people.id`).
+
+- **RESTful API Endpoints**:
+  - `GET/POST/PUT/DELETE /api/players`
+  - `GET/POST/PUT/DELETE /api/coaches`
+  - `GET/POST/PUT/DELETE /api/teams`
+  - `GET/POST/PUT/DELETE /api/news`
+  - `GET/POST/PUT/DELETE /api/events`
+  - `GET/POST/PUT/DELETE /api/brackets`
+
+- **express-validator** – Middleware for validating and sanitizing incoming data in coach/player registration forms.
+
+- **multer** – File upload handler configured for image submissions (e.g., team logos or user profile pictures), stored locally in an `uploads/` directory.
+
+- 📸 Uploaded files are saved in `/uploads/` relative to the Express app root. Ensure this folder exists and is writable.
+
+- **CORS Configured** – Middleware enables secure frontend-backend communication (e.g., React on `localhost:3000` calling Express on `localhost:5000`).
+
+- **Security & Best Practices**:
+  - Uses prepared statements (`?`) for SQL queries to avoid injection.
+  - Passwords should be hashed in production (bcrypt or argon2).
+  - Modular and scalable folder layout for future endpoint expansion.
 
 ---
 
@@ -101,7 +144,7 @@ web2FinalProject/
 
 ---
 
-## 🔧 Setup Instructions
+## 🔧 Setup Instructions <DEPRECATED>
 
 ### Backend
 
@@ -140,7 +183,7 @@ Each section of the app has a dedicated API namespace (e.g. `/api/players`, `/ap
 
 - `GET /api/players` – List players
 - `POST /api/players` – Create with validation
-- `POST /api/players/:id/upload` – Upload image
+- `POST /api/players/:id/upload` – Upload player profile image (Multer-based)
 - `PUT /api/players/:id` – Update player
 - `DELETE /api/players/:id` – Delete
 
@@ -150,6 +193,7 @@ Each section of the app has a dedicated API namespace (e.g. `/api/players`, `/ap
 - `POST /api/coaches` – Create with validation
 - `PUT /api/coaches/:id` – Update coach
 - `DELETE /api/coaches/:id` – Delete coach
+- `POST /api/players/:id/upload` – Upload player profile image (Multer-based)
 
 ### 📅 Events
 
@@ -175,41 +219,56 @@ Each section of the app has a dedicated API namespace (e.g. `/api/players`, `/ap
 
 ---
 
-## 📄 Database Models
+## 📊 Database Schema
 
-### People
+### 🧑 People  
+| Column        | Type           | Description                            |
+|---------------|----------------|----------------------------------------|
+| `id`          | INT            | Primary key                            |
+| `first_name`  | VARCHAR(32)    | Required                               |
+| `last_name`   | VARCHAR(32)    | Required                               |
+| `address1`    | VARCHAR(128)   | Address                                |
+| `city`        | VARCHAR(64)    | City                                   |
+| `state`       | VARCHAR(2)     | State abbreviation                     |
+| `zip`         | VARCHAR(10)    | ZIP code                               |
+| `team_id`     | INT (FK)       | References `teams.id`                  |
+| `email`       | VARCHAR(128)   | Email address                          |
+| `phone`       | VARCHAR(24)    | Phone number                           |
+| `password`    | VARCHAR(32)    | Password (should be hashed in prod)    |
+| `user_name`   | VARCHAR(32)    | Username                               |
+| `person_type` | ENUM           | 'coach', 'player', or 'admin'          |
+| `logo_path`   | VARCHAR(128)   | Image path or URL (optional)           |
 
-| Column        | Type       | Description                        |
-|---------------|------------|------------------------------------|
-| id            | INT        | PK                                 |
-| first_name    | VARCHAR(32)| Required                           |
-| last_name     | VARCHAR(32)| Required                           |
-| address1      | VARCHAR(128)| Address                           |
-| city/state/zip| VARCHAR    | Location fields                    |
-| team_id       | INT (FK)   | References `teams.id`              |
-| email/phone   | VARCHAR    | Contact info                       |
-| password      | VARCHAR    | Password (hashed in prod)          |
-| user_name     | VARCHAR    | Login                              |
-| person_type   | ENUM       | `'player'`, `'coach'`, `'admin'`   |
-| logo_path     | VARCHAR    | Image URL or path                  |
+---
 
-### Teams
+### 🏆 Teams  
+| Column       | Type           | Description                            |
+|--------------|----------------|----------------------------------------|
+| `id`         | INT            | Primary key                            |
+| `name`       | VARCHAR(128)   | Team name                              |
+| `coach_id`   | INT (FK)       | References `people.id`                 |
+| `league_id`  | INT (FK)       | References `leagues.id`                |
+| `notes`      | VARCHAR(1024)  | Team notes or description              |
+| `motto`      | VARCHAR(1024)  | Team motto                             |
+| `logo_path`  | VARCHAR(128)   | Logo image path or URL (optional)      |
 
-| Column       | Type        | Description                       |
-|--------------|-------------|-----------------------------------|
-| id           | INT         | PK                                |
-| name         | VARCHAR     | Team name                         |
-| coach_id     | INT (FK)    | References `people.id`            |
-| league_id    | INT (FK)    | References `leagues.id`           |
-| notes/motto  | TEXT        | Descriptions                      |
-| logo_path    | VARCHAR     | Team logo path                    |
+---
 
-### Leagues
+### 🏅 Leagues  
+| Column        | Type           | Description                            |
+|---------------|----------------|----------------------------------------|
+| `id`          | INT            | Primary key                            |
+| `name`        | VARCHAR(32)    | League name                            |
+| `description` | VARCHAR(2048)  | Description of the league              |
 
-| id | name              | description        |
-|----|-------------------|--------------------|
-| 1  | Pro Snowboarding  | The Professionals  |
-| 2  | Amateur Snowboarding | The Amateurs  |
+---
+
+### 🧾 License Levels  
+| Column        | Type           | Description                            |
+|---------------|----------------|----------------------------------------|
+| `id`          | INT            | Primary key                            |
+| `value`       | VARCHAR(32)    | License level identifier (e.g. A, B)   |
+| `description` | VARCHAR(2048)  | Description of license tier            |
 
 ---
 
